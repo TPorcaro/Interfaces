@@ -2,17 +2,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
-    //let imageData = new Image();
     
-    let image1 = new Image();
-    image1.src = 'Landscape-Color.jpg'
-    image1.onload = () => {
-        canvas.height = image1.height;
-        canvas.width = image1.width;
-        myDrawImage(image1);
-        let imageData = ctx.getImageData(0, 0, image1.width, image1.height);
-        for (let x = 0; x < image1.width; x++) {
-            for (let y = 0; y < image1.height; y++) {
+    let img = new Image();
+    img.src = '../assets/Landscape-Color.jpg';
+    img.onload = () => {
+        canvas.height = img.height;
+        canvas.width = img.width;
+        myDrawImage(img);
+        let imageData = ctx.getImageData(0, 0, img.width, img.height);
+        for (let x = 0; x < img.width; x++) {
+            for (let y = 0; y < img.height; y++) {
                 setPixelToGreyScale(imageData, x, y);
             }   
         }
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imageData.data[index + 2] = greyScale;
         imageData.data[index + 3] = greyScale;
     }
-    const myDrawImage = (image1) => {
-        ctx.drawImage(image1, 0, 0);
+    const myDrawImage = (img) => {
+        ctx.drawImage(img, 0, 0);
     };
     })
