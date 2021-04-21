@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let imageData = ctx.getImageData(0, 0, img.width, img.height);
         for (let x = 0; x < img.width; x++) {
             for (let y = 0; y < img.height; y++) {
-                setPixelToNegativeScale(imageData, x, y);
+                setPixelToBinary(imageData, x, y);
             }   
         }
         setTimeout(() => {
@@ -20,11 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.putImageData(imageData, 0, 0);
         }, 1000);
     };
-    const setPixelToNegativeScale = (imageData,x,y) => { // aumentar brillo + color , disminuir brillo - color;
+    const setPixelToBinary = (imageData,x,y) => {
         let index = (x + y * imageData.width) *4;
-        imageData.data[index + 0] = imageData.data[index + 0] +50;
-        imageData.data[index + 1] = imageData.data[index + 1] +50;
-        imageData.data[index + 2] = imageData.data[index + 2] +50;
+        toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        imageData.data[index + 0] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        imageData.data[index + 1] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        imageData.data[index + 2] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+    }
+    const toBinary = (nmr) => {
+        if(nmr<127.5){
+            return 0;
+        }
+        return 255;
     }
     
     const myDrawImage = (img) => {

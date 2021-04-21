@@ -1,0 +1,18 @@
+body{
+    background-color: grey;
+    overflow: hidden;
+}
+.container{
+    position: absolute;
+    margin: auto;
+    top: 3%;
+    left: 22%;
+}
+#canvas{
+    border: 1px solid;
+    background-color:white;
+}
+.customBtn{
+    border: 1px solid;
+    background-color:white;
+}

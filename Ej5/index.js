@@ -14,24 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
         imageData.data[index + 1] = g;
         imageData.data[index + 2] = b;
         imageData.data[index + 3] = a;
-    } // 255-(y/height*255);
-    for (let x = 0; x < width; x++) {
-        for (let y = 0; y < height/2; y++) {
-            let r,g,b,a;
-            r = y/height*255
-            g = y/height*255;
-            b=0;
-            setPixel(imageData, x, y, r,g ,b ,255);
-        }   
     }
-    for (let x = 0; x < width; x++) {
-        for (let y = height/2; y < height; y++) {
+    for (let y = 0; y <= width; y++) {
+    for (let x = 0; x <= height; x++) {
             let r,g,b,a;
-            r = y/height*255;
-            g = 255-(y/height*255);
-            b =0;
-            setPixel(imageData, x, y, r,g,b,255);
+            if(y<=width/2){
+                r = (y/(width/2))*255;
+                g = (y/(width/2))*255;
+                b=0;
+            }else{
+                r = 255;
+                g = 255 - (((y-width/2)/width*2)*255);
+                b = 0;
+                if(y==width)
+                console.log(r,g,b);
+            }
+            setPixel(imageData, x, y, r, g ,b ,255);
         }
     }
+    // for (let x = 0; x <= height; x++) {
+    //     for (let y = width/2; y <= width; y++) {
+    //         let r,g,b,a;
+    //         r = 255;
+    //         g = 255-((y/width)*255);
+    //         b=0;
+    //         setPixel(imageData, x, y, r,g,b,255);
+    //     }
+    // }
     ctx.putImageData(imageData, 0, 0);
 });
