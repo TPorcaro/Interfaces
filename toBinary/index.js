@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const setPixelToBinary = (imageData,x,y) => {
         let index = (x + y * imageData.width) *4;
-        toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 0] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 1] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 2] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        let binary = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        imageData.data[index + 0] = binary;
+        imageData.data[index + 1] = binary;
+        imageData.data[index + 2] = binary;
     }
     const toBinary = (nmr) => {
         if(nmr<127.5){

@@ -133,16 +133,92 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const setPixelToBinary = (imageData,x,y) => {
         let index = (x + y * imageData.width) *4;
-        toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 0] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 1] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
-        imageData.data[index + 2] = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        let binary = toBinary((imageData.data[index + 0] + imageData.data[index + 1] + imageData.data[index + 2])/3);
+        imageData.data[index + 0] = binary;
+        imageData.data[index + 1] = binary;
+        imageData.data[index + 2] = binary;
     }
     const toBinary = (nmr) => {
         if(nmr<127.5){
             return 0;
         }
         return 255;
+    }
+    const setBlur = () => {
+    let matriz = [
+        [ 1/9, 1/9, 1/9 ],
+        [ 1/9, 1/9, 1/9 ],
+        [ 1/9, 1/9, 1/9 ]
+        ];
+        let imageData = ctx.getImageData(0, 0,canvas.width, canvas.height);
+        for (let x = 0; x < canvas.width; x++) {
+            for (let y = 0; y < canvas.height; y++) {
+                setPixelFilterMatriz(imageData, x, y, matriz);
+            }   
+        }
+        ctx.putImageData(imageData, 0, 0);
+    }
+    const setPixelFilterMatriz = (imageData, x, y, matriz) => {
+        let ul = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Izquierda
+        let uc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Centro
+        let ur = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Derecha
+        let ml = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Izquierda
+        let mc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Centro
+        let mr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Derecha
+        let ll = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Izquierda
+        let lc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Centro
+        let lr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Derecha
+        let pixelUl, pixelUc, pixelUr, pixelMl, pixelMc, pixelMr, pixelLl, pixelLc, pixelLr
+        pixelUl = imageData.data[ul] * matriz[0][0];
+        pixelUc = imageData.data[uc] * matriz[0][1];
+        pixelUr = imageData.data[ur] * matriz[0][2];
+        pixelMl = imageData.data[ml] * matriz[1][0];
+        pixelMc = imageData.data[mc] * matriz[1][1];
+        pixelMr = imageData.data[mr] * matriz[1][2];
+        pixelLl = imageData.data[ll] * matriz[2][0];
+        pixelLc = imageData.data[lc] * matriz[2][1];
+        pixelLr = imageData.data[lr] * matriz[2][2];
+        let r = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
+
+        pixelUl = imageData.data[ul + 1] * matriz[0][0]
+        pixelUc = imageData.data[uc + 1] * matriz[0][1];
+        pixelUr = imageData.data[ur + 1] * matriz[0][2];
+        pixelMl = imageData.data[ml + 1] * matriz[1][0];
+        pixelMc = imageData.data[mc + 1] * matriz[1][1];
+        pixelMr = imageData.data[mr + 1] * matriz[1][2];
+        pixelLl = imageData.data[ll + 1] * matriz[2][0];
+        pixelLc = imageData.data[lc + 1] * matriz[2][1];
+        pixelLr = imageData.data[lr + 1] * matriz[2][2];
+        let g = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
+
+        pixelUl = imageData.data[ul + 2] * matriz[0][0];
+        pixelUc = imageData.data[uc + 2] * matriz[0][1];
+        pixelUr = imageData.data[ur + 2] * matriz[0][2];
+        pixelMl = imageData.data[ml + 2] * matriz[1][0];
+        pixelMc = imageData.data[mc + 2] * matriz[1][1];
+        pixelMr = imageData.data[mr + 2] * matriz[1][2];
+        pixelLl = imageData.data[ll + 2] * matriz[2][0];
+        pixelLc = imageData.data[lc + 2] * matriz[2][1];
+        pixelLr = imageData.data[lr + 2] * matriz[2][2];
+        let b = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
+        imageData.data[mc] = r;
+        imageData.data[mc + 1] = g;
+        imageData.data[mc + 2] = b;
+        imageData.data[mc + 3] = imageData.data[lc + 3];
+    }
+    const setEdges = () => {
+        let matriz = [
+            [-2,-2,-2],
+            [-2,8,-2],
+            [-2,-2,-2]
+        ];
+        let imageData = ctx.getImageData(0, 0,canvas.width, canvas.height);
+        for (let x = 0; x < canvas.width; x++) {
+            for (let y = 0; y < canvas.height; y++) {
+                setPixelFilterMatriz(imageData, x, y, matriz);
+            }   
+        }
+            ctx.putImageData(imageData, 0, 0);
     }
     for (let index = 0; index < filterBtns.length; index++) {
         filterBtns[index].addEventListener('click', (e) => {
@@ -165,6 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 case "Binarizacion":
                     setBinary();
                 break;
+                case "Difuminar":
+                    setBlur();
+                break;
+                case "Deteccion de bordes":
+                    setEdges();
+                break;
                 case "Mas Brillo":
                     setBrightness(50);
                 break;
@@ -180,12 +262,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputColor.addEventListener('change', (e) => {
         ctx.strokeStyle = e.target.value;
-    })
+    });
     inputRange.addEventListener('change', (e) => {
         sizeMouse = e.target.value;
         ctx.lineWidth = e.target.value;
     });
-    
     resetBtn.addEventListener('click', (e) => {
         ctx.clearRect(0,0, canvas.width, canvas.height);
         inputFile.value ="";
