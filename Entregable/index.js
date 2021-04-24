@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     let filterBtns = document.getElementsByClassName('customBtn');
+    let btnDownload = document.getElementById('btnDownload');
     canvas.width = 800;
     canvas.height = 600;
     ctx.lineWidth = 1;
@@ -159,52 +160,52 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.putImageData(imageData, 0, 0);
     }
     const setPixelFilterMatriz = (imageData, x, y, matriz) => {
-        let ul = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Izquierda
-        let uc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Centro
-        let ur = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Derecha
-        let ml = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Izquierda
-        let mc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Centro
-        let mr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Derecha
-        let ll = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Izquierda
-        let lc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Centro
-        let lr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Derecha
+        let posUl = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Izquierda
+        let postUc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Centro
+        let posUr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y - 1 + imageData.height) % imageData.height)) * 4; // Arriba Derecha
+        let posMl = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Izquierda
+        let posMc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Centro
+        let posMr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 0 + imageData.height) % imageData.height)) * 4; // Derecha
+        let posLl = ((x - 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Izquierda
+        let posLc = ((x - 0 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Centro
+        let posLr = ((x + 1 + imageData.width) % imageData.width + imageData.width * ((y + 1 + imageData.height) % imageData.height)) * 4; // Abajo Derecha
         let pixelUl, pixelUc, pixelUr, pixelMl, pixelMc, pixelMr, pixelLl, pixelLc, pixelLr
-        pixelUl = imageData.data[ul] * matriz[0][0];
-        pixelUc = imageData.data[uc] * matriz[0][1];
-        pixelUr = imageData.data[ur] * matriz[0][2];
-        pixelMl = imageData.data[ml] * matriz[1][0];
-        pixelMc = imageData.data[mc] * matriz[1][1];
-        pixelMr = imageData.data[mr] * matriz[1][2];
-        pixelLl = imageData.data[ll] * matriz[2][0];
-        pixelLc = imageData.data[lc] * matriz[2][1];
-        pixelLr = imageData.data[lr] * matriz[2][2];
+        pixelUl = imageData.data[posUl] * matriz[0][0];
+        pixelUc = imageData.data[postUc] * matriz[0][1];
+        pixelUr = imageData.data[posUr] * matriz[0][2];
+        pixelMl = imageData.data[posMl] * matriz[1][0];
+        pixelMc = imageData.data[posMc] * matriz[1][1];
+        pixelMr = imageData.data[posMr] * matriz[1][2];
+        pixelLl = imageData.data[posLl] * matriz[2][0];
+        pixelLc = imageData.data[posLc] * matriz[2][1];
+        pixelLr = imageData.data[posLr] * matriz[2][2];
         let r = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
 
-        pixelUl = imageData.data[ul + 1] * matriz[0][0]
-        pixelUc = imageData.data[uc + 1] * matriz[0][1];
-        pixelUr = imageData.data[ur + 1] * matriz[0][2];
-        pixelMl = imageData.data[ml + 1] * matriz[1][0];
-        pixelMc = imageData.data[mc + 1] * matriz[1][1];
-        pixelMr = imageData.data[mr + 1] * matriz[1][2];
-        pixelLl = imageData.data[ll + 1] * matriz[2][0];
-        pixelLc = imageData.data[lc + 1] * matriz[2][1];
-        pixelLr = imageData.data[lr + 1] * matriz[2][2];
+        pixelUl = imageData.data[posUl + 1] * matriz[0][0]
+        pixelUc = imageData.data[postUc + 1] * matriz[0][1];
+        pixelUr = imageData.data[posUr + 1] * matriz[0][2];
+        pixelMl = imageData.data[posMl + 1] * matriz[1][0];
+        pixelMc = imageData.data[posMc + 1] * matriz[1][1];
+        pixelMr = imageData.data[posMr + 1] * matriz[1][2];
+        pixelLl = imageData.data[posLl + 1] * matriz[2][0];
+        pixelLc = imageData.data[posLc + 1] * matriz[2][1];
+        pixelLr = imageData.data[posLr + 1] * matriz[2][2];
         let g = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
 
-        pixelUl = imageData.data[ul + 2] * matriz[0][0];
-        pixelUc = imageData.data[uc + 2] * matriz[0][1];
-        pixelUr = imageData.data[ur + 2] * matriz[0][2];
-        pixelMl = imageData.data[ml + 2] * matriz[1][0];
-        pixelMc = imageData.data[mc + 2] * matriz[1][1];
-        pixelMr = imageData.data[mr + 2] * matriz[1][2];
-        pixelLl = imageData.data[ll + 2] * matriz[2][0];
-        pixelLc = imageData.data[lc + 2] * matriz[2][1];
-        pixelLr = imageData.data[lr + 2] * matriz[2][2];
+        pixelUl = imageData.data[posUl + 2] * matriz[0][0];
+        pixelUc = imageData.data[postUc + 2] * matriz[0][1];
+        pixelUr = imageData.data[posUr + 2] * matriz[0][2];
+        pixelMl = imageData.data[posMl + 2] * matriz[1][0];
+        pixelMc = imageData.data[posMc + 2] * matriz[1][1];
+        pixelMr = imageData.data[posMr + 2] * matriz[1][2];
+        pixelLl = imageData.data[posLl + 2] * matriz[2][0];
+        pixelLc = imageData.data[posLc + 2] * matriz[2][1];
+        pixelLr = imageData.data[posLr + 2] * matriz[2][2];
         let b = (pixelUl + pixelUc + pixelUr + pixelMl + pixelMc + pixelMr + pixelLl + pixelLc + pixelLr);
-        imageData.data[mc] = r;
-        imageData.data[mc + 1] = g;
-        imageData.data[mc + 2] = b;
-        imageData.data[mc + 3] = imageData.data[lc + 3];
+        imageData.data[posMc] = r;
+        imageData.data[posMc + 1] = g;
+        imageData.data[posMc + 2] = b;
+        imageData.data[posMc + 3] = imageData.data[posLc + 3];
     }
     const setEdges = () => {
         let matriz = [
@@ -270,6 +271,14 @@ document.addEventListener('DOMContentLoaded', () => {
     resetBtn.addEventListener('click', (e) => {
         ctx.clearRect(0,0, canvas.width, canvas.height);
         inputFile.value ="";
+    })
+    btnDownload.addEventListener('click', () => {
+        if(inputFile.value !== ""){
+            let link = document.createElement('a');
+            link.download = 'canvasImage.png';
+            link.href = canvas.toDataURL()
+            link.click();
+        }
     })
     canvas.addEventListener('mouseout', (e) => {
         canDraw = false; 
