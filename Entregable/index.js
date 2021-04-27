@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let x = e.offsetX;
         let y = e.offsetY;
         if(canDraw && clicking && usingEraser){
-            ctx.clearRect(x,y,sizeMouse,sizeMouse);
+            ctx.clearRect(x-sizeMouse/2,y-sizeMouse/2,sizeMouse,sizeMouse);
         }
     }
     const setNormal = () => {
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(usingEraser){
             let x = e.offsetX;
             let y = e.offsetY;
-            ctx.clearRect(x, y,sizeMouse,sizeMouse)
+            ctx.clearRect(x-sizeMouse/2, y-sizeMouse/2,sizeMouse,sizeMouse)
         }
     });
     document.addEventListener('mouseup', () => {
