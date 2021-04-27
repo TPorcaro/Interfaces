@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         draw(e);
         eraser(e);
     });
-    document.addEventListener('mousedown', (e) => {
+    canvas.addEventListener('mousedown', (e) => {
         canDraw = true;
         clicking = true;
         if(usingPencil){
