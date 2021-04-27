@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let r = getRed(imageData, x, y);
         let g = getGreen(imageData, x, y);
         let b = getBlue(imageData, x, y);
-        let hsl = RGBtoHSL(r,g,b);
+        let hsl = RGBtoHSV(r,g,b);
         hsl[1] += 0.1;
-        let rgb = HSLtoRGB(hsl[0], hsl[1], hsl[2]);
+        let rgb = HSVtoRGB(hsl[0], hsl[1], hsl[2]);
         imageData.data[index + 0] = rgb[0];
         imageData.data[index + 1] = rgb[1];
         imageData.data[index + 2] = rgb[2];
@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
 
-    const RGBtoHSL = (r, g, b) => {
+    const RGBtoHSV = (r, g, b) => {
         r /= 255, g /= 255, b /= 255;
     
         let max = Math.max(r, g, b)
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return [ h, s, l ];
     }
       
-    const HSLtoRGB = (h, s, l) => {
+    const HSVtoRGB = (h, s, l) => {
         let r, g, b;
     
         if (s == 0) {
