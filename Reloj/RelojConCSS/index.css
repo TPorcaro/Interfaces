@@ -1,0 +1,16 @@
+.aguja{
+    width: 400px;
+    height: 400px;
+    background-image: url('./assets/aguja.png');
+    animation: girarAguja 60s infinite linear;
+    transform-origin: 50% 45%;
+}
+
+@keyframes girarAguja{
+    0%{
+       transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
