@@ -235,7 +235,7 @@ class Tablero {
     checkMove(ficha) {
             let fichaX = ficha.getPosX();
             let fichaY = ficha.getPosY();
-            let colDropped = this.getColSelected(fichaX);
+            let colDropped = this.getColSelected(fichaX,fichaY);
             let keepLooking = true;
             let posObject = null;
             if(colDropped != -1){
@@ -257,10 +257,11 @@ class Tablero {
         }
         return posObject;
     }
-    getColSelected(posX){
+    getColSelected(posX,posY){
         let returnedIndex = -1;
+        let finalY = this.espacios[this.size-1][0].posY;
         this.espacios[0].forEach((celda,index) => {
-            if(posX >= celda.posX && posX <= (celda.posX + celda.width)){
+            if(posY <= finalY && posX >= celda.posX && posX <= (celda.posX + celda.width)){
                 returnedIndex = index;
             }
         });

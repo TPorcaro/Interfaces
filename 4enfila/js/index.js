@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     canvas.addEventListener('mousedown', (eMouseDown) =>{
         if(juego1.checkHit(eMouseDown.offsetX, eMouseDown.offsetY)){
             canvas.addEventListener('mousemove', (eMouseMove) => {
-                juego1.handleDrag(eMouseMove.offsetX, eMouseMove.offsetY);
+                juego1.handleDrag(eMouseMove.offsetX, eMouseMove.offsetY)
             });
            
         }
@@ -23,25 +23,41 @@ document.addEventListener('DOMContentLoaded', () =>{
     let fichaAzul = document.querySelector('.fichaAzul');
     let intervalTurn = setInterval(() => {
         if(juego1.getColorTurn() == 'red'){
-            fichaRoja.classList.add('show');
-            fichaRoja.classList.remove('hide');
-            fichaAzul.classList.add('hide');
-            fichaAzul.classList.remove('show');
+            fichaRoja.classList.add('showFicha');
+            fichaRoja.classList.remove('hideFicha');
+            fichaAzul.classList.add('hideFicha');
+            fichaAzul.classList.remove('showFicha');
         }else{
-            fichaAzul.classList.add('show');
-            fichaAzul.classList.remove('hide');
-            fichaRoja.classList.add('hide');
-            fichaRoja.classList.remove('show');
+            fichaAzul.classList.add('showFicha');
+            fichaAzul.classList.remove('hideFicha');
+            fichaRoja.classList.add('hideFicha');
+            fichaRoja.classList.remove('showFicha');
         }
     }, 10);
+    let audio = new Audio('./assets/firework.mp3');
+    let btnReset = document.querySelector('.btnReset');
+    let fireWorks = document.querySelector('.pyro');
+    let textP = document.querySelector('.textP');
+    btnReset.addEventListener('click', () => {
+        juego1 = new Juego(ctx, canvas.width,canvas.height);
+        juego1.draw();
+        textP.textContent = "Turno de ";
+        btnReset.classList.add('hide');
+        btnReset.classList.remove('show');
+        audio.pause();
+        fireWorks.classList.remove('show');
+        fireWorks.classList.add('hide');
+    });
     showAlert = (winner) =>{
+        console.log(winner);
         if(winner){
             clearInterval(intervalTurn);
-            let textH1 = document.querySelector('.textH1');
-            textH1.textContent = "Ganador "
-            let fireWorks = document.querySelector('.pyro');
+            textP.textContent = "Ganador ";
             fireWorks.classList.add('show');
             fireWorks.classList.remove('hide');
+            audio.play();
+            btnReset.classList.add('show');
+            btnReset.classList.remove('hide');
         }
     }
 })
