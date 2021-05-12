@@ -47,7 +47,7 @@ class Tablero {
     }
     initFichasRed(quantityFichas){
         let img = new Image();
-        img.src = './assets/fichaRoja.png';
+        img.src = 'assets/fichaRoja.png';
         img.onload = () => {
             for (let index = 0; index <quantityFichas; index++) {
                 let newFicha = new Ficha(250, 200 + (index*20), 30, "red", img, this.ctx);
@@ -57,7 +57,7 @@ class Tablero {
     }
     initFichasBlue(quantityFichas){
         let img = new Image();
-        img.src = './assets/fichaAzul.png';
+        img.src = 'assets/fichaAzul.png';
         img.onload = () => {
             for (let index = 0; index <quantityFichas; index++) {
                 let newFicha = new Ficha(920, 200 + (index*20), 30, "blue", img, this.ctx);
