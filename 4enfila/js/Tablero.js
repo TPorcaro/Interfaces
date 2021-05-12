@@ -9,14 +9,14 @@ class Tablero {
         this.height = height;
         this.initFichas(22);
         this.background = 'blue';
-        this.turnoActivo = false;
+        this.turnoActivo = true;
         this.createHitBox();
     }
     draw(){
         this.espacios.forEach(row => {
             row.forEach(col =>{
                 this.ctx.beginPath();
-                this.ctx.fillStyle = "blue";
+                this.ctx.fillStyle = '#6B7AFF';
                 this.ctx.rect(col.posX, col.posY, col.width, col.height);
                 this.ctx.fill();
                 this.ctx.fillStyle = "white";
@@ -24,6 +24,8 @@ class Tablero {
                 this.ctx.arc(((col.width)/2+col.posX), ((col.height)/2+col.posY), col.width/2-5, 0 , Math.PI * 2, false);
                 this.ctx.closePath();
                 this.ctx.fill();
+                this.ctx.fillStyle = "blue";
+                this.ctx.fillRect(255, 707, 660, 30)
             })            
         });
         this.fichasTeam1.forEach(ficha => {
@@ -32,6 +34,12 @@ class Tablero {
         this.fichasTeam2.forEach(ficha => {
             ficha.draw();
         }); 
+    }
+    getColorTurn(){
+        if(this.turnoActivo){
+            return 'red';
+        }
+        return 'blue';
     }
     initFichas(quantityFichas){
         this.initFichasRed(quantityFichas);
@@ -42,7 +50,7 @@ class Tablero {
         img.src = './assets/fichaRoja.png';
         img.onload = () => {
             for (let index = 0; index <quantityFichas; index++) {
-                let newFicha = new Ficha(500, 100 + (index*20), 30, "red", img, this.ctx);
+                let newFicha = new Ficha(250, 200 + (index*20), 30, "red", img, this.ctx);
                 this.fichasTeam1.push(newFicha);
             }
         }
@@ -52,7 +60,7 @@ class Tablero {
         img.src = './assets/fichaAzul.png';
         img.onload = () => {
             for (let index = 0; index <quantityFichas; index++) {
-                let newFicha = new Ficha(60, 100 + (index*20), 30, "blue", img, this.ctx);
+                let newFicha = new Ficha(920, 200 + (index*20), 30, "blue", img, this.ctx);
                 this.fichasTeam2.push(newFicha);
             }
         }
@@ -74,11 +82,27 @@ class Tablero {
         return null;
     }
     checkWinner(col, row){
+        console.log(this.espacios);
         let chipDropped = this.espacios[row][col].ficha;
         if(this.checkHorizontal(col,row) || this.checkVertical(col,row) || this.checkDiagonalLeft(col,row) || this.checkDiagonalRight(col,row)){
+            this.fichasUnselectable();
             return chipDropped.getColor();
         }
-    
+    }
+    fichasUnselectable(){
+        this.espacios.forEach(row => {
+            row.forEach(col => {
+                if(col.ficha != null){
+                    col.ficha.cantMove();
+                }
+            });
+        });
+        this.fichasTeam1.forEach(ficha => {
+            ficha.cantMove();
+        });
+        this.fichasTeam2.forEach(ficha => {
+            ficha.cantMove();
+        })
     }
     checkDiagonalRight(col, row){
         let chipsFound = 1;
@@ -204,7 +228,7 @@ class Tablero {
                         }
                     } 
                 }
-                }
+            }
         }
         return chipsFound === 4;
     }
@@ -246,10 +270,10 @@ class Tablero {
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
                 let blankSpace = {
-                    posX: 60 + (x * 62),
-                    posY: 130 + (y * 62),
-                    width: 62,
-                    height: 62,
+                    posX: (this.width/5) + (x * 66),
+                    posY: (this.height/5) + (y * 66),
+                    width: 66,
+                    height: 66,
                     ficha : null
                 };
                 if(x==0){

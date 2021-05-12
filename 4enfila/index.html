@@ -4,17 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    
-    <canvas id="canvasGame"></canvas>
-    
-    
+    <nav class="navbar navbar-dark bg-dark d-flex justify-content-around ">
+        <span class="navbar-brand h1 ">Entregable 2</span>
+        <a href="https://exa.unicen.edu.ar/" target="_blank">
+            <img src="https://exa.unicen.edu.ar/wp-content/uploads/2021/03/LogoExactas.png" width = '200px' class="img-fluid" alt="...">
+        </a>
+        <span class="navbar-brand mb-0 h1">Porcaro Tomas</span>
+    </nav>
+    <div class="pyro hide">
+        <div class="before"></div>
+        <div class="after"></div>
+    </div>
+        <div class="turn row">
+            <h1 unselectable class="textH1 ">
+                <p class="textH1">Turno de </p>
+                <img class="hide fichaAzul img-fluid" width="50px" height="50px" src="./assets/fichaAzul.png" alt="">
+                <img class="show fichaRoja img-fluid" width="50px" height="50px"  src="./assets/fichaRoja.png" alt="">
+            </h1>
+        </div>
+        <div class="container">
+            <canvas id="canvasGame"></canvas>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <script src="./js/Juego.js"></script>
     <script src="./js/Tablero.js"></script>
-    <script src="./js/ficha.js"></script>
-    <script src="./js/Menu.js"></script>
+    <script src="./js/Ficha.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

@@ -14,12 +14,15 @@ class Juego {
     }
     checkHit(posX, posY){
         let selectedChip = this.tablero.getSelectedChip(posX, posY);
-        if (selectedChip) {
+        if (selectedChip && selectedChip.canMove) {
             this.mode = 'dragging';
             this.selectedChip = selectedChip;
             return true;
         }
         return false;
+    }
+    getColorTurn(){
+        return this.tablero.getColorTurn();
     }
     handleDrag(posX, posY){
         if(this.mode === 'dragging' && this.selectedChip){
@@ -29,17 +32,20 @@ class Juego {
     }
     stopDragging(){
         if(this.mode === 'dragging'){
-            this.checkMove();
+            return this.checkMove();
         }
         this.mode = 'standBy';
     }
     checkMove(){
-        let positions = this.tablero.checkMove(this.selectedChip);
-        this.draw();
-        if(positions)
-        this.checkWinner(positions)
+        if(this.selectedChip != null){
+            let positions = this.tablero.checkMove(this.selectedChip);
+            this.draw();
+            this.selectedChip = null;
+            if(positions)
+            return this.checkWinner(positions)
+        }
     }
     checkWinner(positions){
-        
+        return this.tablero.checkWinner(positions.col, positions.row);
     }
 }
