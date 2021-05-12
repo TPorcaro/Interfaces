@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () =>{
             textP.textContent = "Ganador ";
             fireWorks.classList.add('show');
             fireWorks.classList.remove('hide');
+            audio.autoplay=true;
+            audio.loop = true;
             audio.play();
             btnReset.classList.add('show');
             btnReset.classList.remove('hide');

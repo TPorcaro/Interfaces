@@ -9,7 +9,7 @@ class Tablero {
         this.height = height;
         this.initFichas(22);
         this.background = 'blue';
-        this.turnoActivo = true;
+        this.isRedTurn = true;
         this.createHitBox();
     }
     draw(){
@@ -36,7 +36,7 @@ class Tablero {
         }); 
     }
     getColorTurn(){
-        if(this.turnoActivo){
+        if(this.isRedTurn){
             return 'red';
         }
         return 'blue';
@@ -66,7 +66,7 @@ class Tablero {
         }
     }
     getSelectedChip(posX, posY) {
-        if (this.turnoActivo) {
+        if (this.isRedTurn) {
             for (let i = 0; i < this.fichasTeam1.length; i++) {
                 if (this.fichasTeam1[i].hit(posX, posY)) {
                     return this.fichasTeam1[i];
@@ -246,7 +246,7 @@ class Tablero {
                                 ficha.move((this.espacios[index][colDropped].posX + this.espacios[index][colDropped].posX +this.espacios[index][colDropped].width) /2, (this.espacios[index][colDropped].posY + this.espacios[index][colDropped].posY +this.espacios[index][colDropped].width) /2);
                                 keepLooking = false;
                                 ficha.cantMove();
-                                this.turnoActivo = !this.turnoActivo;
+                                this.isRedTurn = !this.isRedTurn;
                                 posObject = {
                                     col : colDropped,
                                     row : index
