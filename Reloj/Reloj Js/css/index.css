@@ -1,0 +1,18 @@
+#horas{
+    animation: girarAguja 43200s infinite linear;
+}
+#minutos{
+    animation: girarAguja 3600s infinite linear;
+}
+#segundos{
+    /* animation: girarAguja 60s infinite linear; */
+}
+
+@keyframes girarAguja {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
