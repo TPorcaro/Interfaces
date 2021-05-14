@@ -122,7 +122,7 @@ class Tablero {
         if(chipsFound != 4){
             let newIndex = 4-chipsFound;
             for (let index = 1; index <= newIndex; index++) {
-                if(this.espacios[row+index] != undefined){
+                if(this.espacios[row-index] != undefined){
                     let posOfBoard = this.espacios[row-index][col-index];
                     if(posOfBoard != undefined){
                         if(posOfBoard.ficha !=null){
@@ -154,7 +154,7 @@ class Tablero {
         if(chipsFound != 4){
             let newIndex = 4-chipsFound;
             for (let index = 1; index <= newIndex; index++) {
-                if(this.espacios[row+index] != undefined){
+                if(this.espacios[row-index] != undefined){
                     let posOfBoard = this.espacios[row-index][col+index];
                     if(posOfBoard != undefined){
                         if(posOfBoard.ficha !=null){
@@ -172,7 +172,6 @@ class Tablero {
         let chipsFound = 1;
         let chipDropped = this.espacios[row][col].ficha;
         for (let index = 1; index <= 4; index++) {
-            if(this.espacios[row+index] != undefined){
                 let posOfBoard = this.espacios[row][col+index];
                 if(posOfBoard != undefined){
                      if(posOfBoard.ficha !=null){
@@ -181,12 +180,10 @@ class Tablero {
                          }
                      }
                  }
-            }
         }
         if(chipsFound != 4){
             let newIndex = 4-chipsFound;
             for (let index = 1; index <= newIndex; index++) {
-                if(this.espacios[row+index] != undefined){
                     let posOfBoard = this.espacios[row][col-index];
                     if(posOfBoard != undefined){
                         if(posOfBoard.ficha !=null){
@@ -196,8 +193,8 @@ class Tablero {
                         }
                     } 
                 }
-                }
         }
+
         return chipsFound === 4;
     }
     checkVertical(col,row){
@@ -257,7 +254,7 @@ class Tablero {
         }
         return posObject;
     }
-    getColSelected(posX,posY){
+    getColSelected(posX,posY){ // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros 
         let returnedIndex = -1;
         let finalY = this.espacios[this.size-1][0].posY;
         this.espacios[0].forEach((celda,index) => {
@@ -267,10 +264,10 @@ class Tablero {
         });
         return returnedIndex;
     }
-    createHitBox() {
+    createHitBox() { // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros 
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
-                let blankSpace = {
+                let obj = {
                     posX: (this.width/5) + (x * 66),
                     posY: (this.height/5) + (y * 66),
                     width: 66,
@@ -280,7 +277,7 @@ class Tablero {
                 if(x==0){
                     this.espacios[y] = new Array(this.size);
                 }
-                this.espacios[y][x]= blankSpace;
+                this.espacios[y][x]= obj;
             }
         }
     }
