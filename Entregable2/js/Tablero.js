@@ -145,6 +145,8 @@ class Tablero {
                     if(posOfBoard.ficha !=null){
                         if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                             chipsFound++;
+                        }else{
+                            break;
                         }
                     }
                 }
@@ -159,12 +161,15 @@ class Tablero {
                         if(posOfBoard.ficha !=null){
                             if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                                 chipsFound++;
+                            }else{
+                                break;
                             }
                         }
                     } 
                 }
             }
         }
+        console.log(chipsFound, 'diagonalLeft');
         return chipsFound === 4;
     }
     checkDiagonalRight(col, row){
@@ -177,6 +182,8 @@ class Tablero {
                      if(posOfBoard.ficha !=null){
                          if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                              chipsFound++;
+                        }else{
+                            break;
                         }
                     }
                 }
@@ -191,12 +198,15 @@ class Tablero {
                         if(posOfBoard.ficha !=null){
                             if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                                 chipsFound++;
+                            }else{
+                                break;
                             }
                         }
                     } 
                 }
             }
         }
+        console.log(chipsFound, 'diagonalRight');
         return chipsFound === 4;
     }
     checkHorizontal(col,row){
@@ -206,6 +216,7 @@ class Tablero {
                 let posOfBoard = this.espacios[row][col+index];
                 if(posOfBoard != undefined){
                      if(posOfBoard.ficha !=null){
+                         console.log('Color de la ficha en la pos',row,col+index,posOfBoard.ficha.getColor());
                          if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                             chipsFound++;
                          }else{
@@ -220,6 +231,7 @@ class Tablero {
                     let posOfBoard = this.espacios[row][col-index];
                     if(posOfBoard != undefined){
                         if(posOfBoard.ficha !=null){
+                            console.log('Color de la ficha en la pos',row,col-index,posOfBoard.ficha.getColor());
                             if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                                 chipsFound++;
                             }else{
@@ -229,6 +241,7 @@ class Tablero {
                     } 
                 }
         }
+        console.log(chipsFound, 'Horizontal');
         return chipsFound === 4;
     }
     checkVertical(col,row){
@@ -241,6 +254,8 @@ class Tablero {
                      if(posOfBoard.ficha !=null){
                          if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                              chipsFound++;
+                         }else{
+                             break;
                          }
                      }
                  }
@@ -255,12 +270,15 @@ class Tablero {
                         if(posOfBoard.ficha !=null){
                             if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                                 chipsFound++;
+                            }else{
+                                break;
                             }
                         }
                     } 
                 }
             }
         }
+        console.log(chipsFound, 'Vertical');
         return chipsFound === 4;
     }
     // Verifica y devuelve un movimiento de una ficha seleccionada
