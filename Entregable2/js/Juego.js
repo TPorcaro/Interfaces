@@ -48,4 +48,10 @@ class Juego {
     checkWinner(positions){
         return this.tablero.checkWinner(positions.col, positions.row);
     }
+    checkTie(){
+        return this.tablero.checkTie();
+    }
+    checkFichasInBoard(){
+        return this.tablero.checkFichasInBoard();
+    }
 }

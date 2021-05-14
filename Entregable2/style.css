@@ -17,8 +17,8 @@ body{
 .turn{
     user-select: none;
     position: absolute;
-    top: 10vh;
-    left: 41vw;
+    top: 15vh;
+    left: 42vw;
     color: #7c795d; 
     font-family: 'Trocchi', serif;
     font-size: 45px;
