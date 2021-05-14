@@ -1,6 +1,6 @@
 body{
     user-select: none;
-    overflow: hidden;
+    overflow-x : hidden;
     background: url('./assets/fnd.jpg');
 }
 .canvasGame{
@@ -17,16 +17,15 @@ body{
 .turn{
     user-select: none;
     position: absolute;
-    top: 8vw;
+    top: 10vh;
     left: 41vw;
     color: #7c795d; 
     font-family: 'Trocchi', serif;
     font-size: 45px;
     font-weight: normal;
-    line-height: 48px;
     margin: 0;
-    width: 13vw;
-    height: 10vw;
+    width: 15vw;
+    height: 10vh;
     z-index: -1;
 }
 .textP{
