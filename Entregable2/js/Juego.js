@@ -12,6 +12,7 @@ class Juego {
         this.ctx.clearRect(0, 0, this.width, this.height);
         this.tablero.draw();
     }
+    //Verifica si una ficha fue clickeada 
     checkHit(posX, posY){
         let selectedChip = this.tablero.getSelectedChip(posX, posY);
         if (selectedChip && selectedChip.canMove) {
@@ -24,18 +25,21 @@ class Juego {
     getColorTurn(){
         return this.tablero.getColorTurn();
     }
+    // Redibuja la ficha dependiendo la posicion pasada por parametros
     handleDrag(posX, posY){
         if(this.mode === 'dragging' && this.selectedChip){
             this.selectedChip.move(posX, posY);
             this.draw();
         }
     }
+    // Para de mover la ficha y ademas verifica si se realizo un movimiento valido
     stopDragging(){
         if(this.mode === 'dragging'){
             return this.checkMove();
         }
         this.mode = 'standBy';
     }
+    //Verificia un movimiento valido y si hubo un ganador
     checkMove(){
         if(this.selectedChip != null){
             let positions = this.tablero.checkMove(this.selectedChip);

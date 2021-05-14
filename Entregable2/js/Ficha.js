@@ -18,6 +18,7 @@ class Ficha {
     draw() {
         this.ctx.drawImage(this.image, this.posX-this.radius, this.posY-this.radius, this.radius*2, this.radius*2);
     }
+    // Verifica si las posiciones coinciden dentro de la ficha
     hit(posX,posY){
         let radio = Math.sqrt((posX - this.posX) ** 2 + (posY - this.posY) ** 2);
         return radio < this.radius;
@@ -25,6 +26,7 @@ class Ficha {
     getColor(){
         return this.color;
     }
+    // Cambia el centro de la ficha
     move(posX, posY){
         if(this.canMove){
             this.posX = posX;

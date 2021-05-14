@@ -12,6 +12,7 @@ class Tablero {
         this.isRedTurn = true;
         this.createHitBox();
     }
+    //Dibuja la hitbox cuadrada y despues dibuja los circulos simulando los espacios del tablero. Dibuja las fichas rojas y azulas
     draw(){
         this.espacios.forEach(row => {
             row.forEach(col =>{
@@ -41,6 +42,7 @@ class Tablero {
         }
         return 'blue';
     }
+     // Se encarga de inicializar los 2 arreglos de fichas
     initFichas(quantityFichas){
         this.initFichasRed(quantityFichas);
         this.initFichasBlue(quantityFichas);
@@ -65,6 +67,7 @@ class Tablero {
             }
         }
     }
+    //Retorna la ficha que responde al evento mousedown
     getSelectedChip(posX, posY) {
         if (this.isRedTurn) {
             for (let i = 0; i < this.fichasTeam1.length; i++) {
@@ -81,6 +84,7 @@ class Tablero {
         }
         return null;
     }
+    //Verifica si hubo alguna jugada que fue ganadora y retorna el color del ganador
     checkWinner(col, row){
         let chipDropped = this.espacios[row][col].ficha;
         if(this.checkHorizontal(col,row) || this.checkVertical(col,row) || this.checkDiagonalLeft(col,row) || this.checkDiagonalRight(col,row)){
@@ -88,6 +92,7 @@ class Tablero {
             return chipDropped.getColor();
         }
     }
+    //Se fija cuantas fichas hay en el tablero
     checkFichasInBoard(){
         let newQuantityFichas = 0;
         this.espacios.forEach(row => {
@@ -99,6 +104,7 @@ class Tablero {
         });
         return newQuantityFichas;
     }
+    // Verifica si hubo un empate
     checkTie(){
         let isATie = true;
         this.fichasTeam1.forEach(ficha => {
@@ -113,6 +119,7 @@ class Tablero {
         });
         return isATie;
     }
+    // Hace todas las fichas imposibles de seleccionar
     fichasUnselectable(){
         this.espacios.forEach(row => {
             row.forEach(col => {
@@ -128,7 +135,7 @@ class Tablero {
             ficha.cantMove();
         })
     }
-    checkDiagonalRight(col, row){
+    checkDiagonalLeft(col, row){
         let chipsFound = 1;
         let chipDropped = this.espacios[row][col].ficha;
         for (let index = 1; index <= 4; index++) {
@@ -158,10 +165,9 @@ class Tablero {
                 }
             }
         }
-        console.log(chipsFound, 'diagonalRight');
         return chipsFound === 4;
     }
-    checkDiagonalLeft(col, row){
+    checkDiagonalRight(col, row){
         let chipsFound = 1;
         let chipDropped = this.espacios[row][col].ficha;
         for (let index = 1; index <= 4; index++) {
@@ -191,7 +197,6 @@ class Tablero {
                 }
             }
         }
-        console.log(chipsFound, 'diagonalLeft');
         return chipsFound === 4;
     }
     checkHorizontal(col,row){
@@ -201,7 +206,6 @@ class Tablero {
                 let posOfBoard = this.espacios[row][col+index];
                 if(posOfBoard != undefined){
                      if(posOfBoard.ficha !=null){
-                         console.log('Color de la ficha en la pos',row,col+index,posOfBoard.ficha.getColor());
                          if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                             chipsFound++;
                          }else{
@@ -216,7 +220,6 @@ class Tablero {
                     let posOfBoard = this.espacios[row][col-index];
                     if(posOfBoard != undefined){
                         if(posOfBoard.ficha !=null){
-                            console.log('Color de la ficha en la pos',row,col-index,posOfBoard.ficha.getColor());
                             if(posOfBoard.ficha.getColor() === chipDropped.getColor()){
                                 chipsFound++;
                             }else{
@@ -226,7 +229,6 @@ class Tablero {
                     } 
                 }
         }
-        console.log(chipsFound, 'Horizontal');
         return chipsFound === 4;
     }
     checkVertical(col,row){
@@ -259,9 +261,9 @@ class Tablero {
                 }
             }
         }
-        console.log(chipsFound, 'Vertical');
         return chipsFound === 4;
     }
+    // Verifica y devuelve un movimiento de una ficha seleccionada
     checkMove(ficha) {
             let fichaX = ficha.getPosX();
             let fichaY = ficha.getPosY();
@@ -287,7 +289,9 @@ class Tablero {
         }
         return posObject;
     }
-    getColSelected(posX,posY){ // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros 
+     // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros
+     // Se encarga de devolver la columna seleccionada
+    getColSelected(posX,posY){
         let returnedIndex = -1;
         let finalY = this.espacios[this.size-1][0].posY;
         this.espacios[0].forEach((celda,index) => {
@@ -297,7 +301,9 @@ class Tablero {
         });
         return returnedIndex;
     }
-    createHitBox() { // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros 
+    // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros
+    // Se encarga de crear la hitbox del tablero
+    createHitBox() {  
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {
                 let obj = {
