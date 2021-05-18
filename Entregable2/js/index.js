@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     canvas.height = 900;
     let quantityFichasBefore = 0;
     let isATie = false;
+    let gameFinish = false;
     let ctx = canvas.getContext('2d');
     let juego1 = new Juego(ctx, canvas.width,canvas.height);
     juego1.draw();
@@ -71,28 +72,31 @@ document.addEventListener('DOMContentLoaded', () =>{
     });
     // Si se tiene un ganador se encarga de mostrarlo
     showAlert = (winner) =>{
-        if(winner){
-            clearInterval(intervalTurn);
-            textP.textContent = "Ganador ";
-            fireWorks.classList.add('show');
-            fireWorks.classList.remove('hide');
-            audio.autoplay=true;
-            audio.loop = true;
-            audio.play();
-        }else{
-            // En caso de que no haya un ganador hay que preguntar si hubo empate o no,
-            // si hubo un empate remuevo las fichas que se encargan de mostrar los turnos
-            if(quantityFichasBefore != juego1.checkFichasInBoard()){
-                let moveAudio = new Audio('./assets/move.mp3');
-                moveAudio.play();
-            }
-            isATie = juego1.checkTie();
-            if(isATie){
-                textP.textContent = "Empate :(";
-                fichaAzul.classList.add('hideFicha');
-                fichaRoja.classList.add('hideFicha');
-                fichaAzul.classList.remove('showFicha');
-                fichaRoja.classList.remove('showFicha');
+        if(!gameFinish){
+            if(winner){
+                clearInterval(intervalTurn);
+                textP.textContent = "Ganador ";
+                fireWorks.classList.add('show');
+                fireWorks.classList.remove('hide');
+                audio.autoplay=true;
+                audio.loop = true;
+                audio.play();
+                gameFinish = true;
+            }else{
+                // En caso de que no haya un ganador hay que preguntar si hubo empate o no,
+                // si hubo un empate remuevo las fichas que se encargan de mostrar los turnos
+                if(quantityFichasBefore != juego1.checkFichasInBoard()){
+                    let moveAudio = new Audio('./assets/move.mp3');
+                    moveAudio.play();
+                }
+                isATie = juego1.checkTie();
+                if(isATie){
+                    textP.textContent = "Empate :(";
+                    fichaAzul.classList.add('hideFicha');
+                    fichaRoja.classList.add('hideFicha');
+                    fichaAzul.classList.remove('showFicha');
+                    fichaRoja.classList.remove('showFicha');
+                }
             }
         }
     }
