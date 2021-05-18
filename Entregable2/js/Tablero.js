@@ -62,7 +62,6 @@ class Tablero {
         let img = new Image();
         img.src = 'assets/fichaAzul.png';
         img.onload = () => {
-            console.log(this.espacios, this.cols);
             for (let index = 0; index <quantityFichas; index++) {
                 let newFicha = new Ficha(this.espacios[0][this.cols-1].posX + 190, 200 + (index*20), 30, "blue", img, this.ctx);
                 this.fichasTeam2.push(newFicha);
@@ -88,7 +87,6 @@ class Tablero {
     }
     //Verifica si hubo alguna jugada que fue ganadora y retorna el color del ganador
     checkWinner(col, row){
-        console.log(col,row);
         let chipDropped = this.espacios[row][col].ficha;
         if(this.checkHorizontal(col,row) || this.checkVertical(col,row) || this.checkDiagonalLeft(col,row) || this.checkDiagonalRight(col,row)){
             this.fichasUnselectable();
@@ -109,17 +107,38 @@ class Tablero {
     }
     // Verifica si hubo un empate
     checkTie(){
+        if(this.checkTieTablero() || this.checkTieFichas()){
+            console.log('empate');
+            return true;
+        }
+        return false;
+    }
+    checkTieFichas(){
         let isATie = true;
         this.fichasTeam1.forEach(ficha => {
+            console.log(ficha);
             if(ficha.canMove){
                 isATie = false;
             }
         });
-        this.fichasTeam2.forEach(ficha => {
-            if(ficha.canMove){
-                isATie = false;
-            }
-        });
+            this.fichasTeam2.forEach(ficha => {
+                if(ficha.canMove){
+                    isATie = false;
+                }
+            });
+        return isATie;
+    }
+    checkTieTablero(){
+        let isATie = true;
+            this.espacios.forEach(row => {
+                row.forEach(col => {
+                    if(col.ficha == null){
+                        console.log('entra');
+                        isATie = false
+                    }
+                });
+            })
+            console.log('empate espacios');
         return isATie;
     }
     // Hace todas las fichas imposibles de seleccionar
