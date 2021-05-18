@@ -1,16 +1,17 @@
 class Tablero {
-    constructor(ctx, size,width,height) {
+    constructor(ctx,rows,cols,width,height) {
         this.ctx = ctx;
         this.fichasTeam1 = [];
         this.fichasTeam2 = [];
         this.espacios = [[]];
-        this.size = size;
+        this.rows = rows;
+        this.cols = cols;
         this.width = width;
         this.height = height;
+        this.createHitBox();
         this.initFichas(22);
         this.background = 'blue';
         this.isRedTurn = true;
-        this.createHitBox();
     }
     //Dibuja la hitbox cuadrada y despues dibuja los circulos simulando los espacios del tablero. Dibuja las fichas rojas y azulas
     draw(){
@@ -26,8 +27,8 @@ class Tablero {
                 this.ctx.closePath();
                 this.ctx.fill();
                 this.ctx.fillStyle = "blue";
-                this.ctx.fillRect(255, 707, 660, 30)
-            })            
+                this.ctx.fillRect(260, this.espacios[this.rows-1][0].posY+66, this.espacios[0][this.cols-1].posX-125, 30)
+            });
         });
         this.fichasTeam1.forEach(ficha => {
             ficha.draw();
@@ -52,7 +53,7 @@ class Tablero {
         img.src = 'assets/fichaRoja.png';
         img.onload = () => {
             for (let index = 0; index <quantityFichas; index++) {
-                let newFicha = new Ficha(250, 200 + (index*20), 30, "red", img, this.ctx);
+                let newFicha = new Ficha(this.espacios[0][0].posX - 120, 200 + (index*20), 30, "red", img, this.ctx);
                 this.fichasTeam1.push(newFicha);
             }
         }
@@ -61,8 +62,9 @@ class Tablero {
         let img = new Image();
         img.src = 'assets/fichaAzul.png';
         img.onload = () => {
+            console.log(this.espacios, this.cols);
             for (let index = 0; index <quantityFichas; index++) {
-                let newFicha = new Ficha(920, 200 + (index*20), 30, "blue", img, this.ctx);
+                let newFicha = new Ficha(this.espacios[0][this.cols-1].posX + 190, 200 + (index*20), 30, "blue", img, this.ctx);
                 this.fichasTeam2.push(newFicha);
             }
         }
@@ -86,6 +88,7 @@ class Tablero {
     }
     //Verifica si hubo alguna jugada que fue ganadora y retorna el color del ganador
     checkWinner(col, row){
+        console.log(this.espacios[0][this.rows-1].posX-75, this.espacios[this.cols-1][0].posY+18);
         let chipDropped = this.espacios[row][col].ficha;
         if(this.checkHorizontal(col,row) || this.checkVertical(col,row) || this.checkDiagonalLeft(col,row) || this.checkDiagonalRight(col,row)){
             this.fichasUnselectable();
@@ -305,7 +308,7 @@ class Tablero {
      // Se encarga de devolver la columna seleccionada
     getColSelected(posX,posY){
         let returnedIndex = -1;
-        let finalY = this.espacios[this.size-1][0].posY;
+        let finalY = this.espacios[this.cols-1][0].posY;
         this.espacios[0].forEach((celda,index) => {
             if(posY <= finalY+66 && posX >= celda.posX && posX <= (celda.posX + celda.width)){
                 returnedIndex = index;
@@ -316,8 +319,8 @@ class Tablero {
     // Este metodo lo hicimos en clase con ayuda del profesor Sebastian Bellido junto a 2 compañeros
     // Se encarga de crear la hitbox del tablero
     createHitBox() {  
-        for (let y = 0; y < this.size; y++) {
-            for (let x = 0; x < this.size; x++) {
+        for (let y = 0; y < this.rows; y++) {
+            for (let x = 0; x < this.cols; x++) {
                 let obj = {
                     posX: (this.width/5) + (x * 66),
                     posY: (this.height/5) + (y * 66),
@@ -326,7 +329,7 @@ class Tablero {
                     ficha : null
                 };
                 if(x==0){
-                    this.espacios[y] = new Array(this.size);
+                    this.espacios[y] = new Array(this.cols);
                 }
                 this.espacios[y][x]= obj;
             }

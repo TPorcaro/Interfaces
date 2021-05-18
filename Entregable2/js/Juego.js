@@ -1,11 +1,13 @@
 class Juego {
-    constructor(ctx, width, height){
+    constructor(ctx, width, height, rows = 8, cols = 8){
         this.ctx = ctx;
-        this.tablero = new Tablero(ctx,8,width,height);
         this.mode = '';
         this.width = width;
         this.height = height;
         this.selectedChip = null;
+        this.rows = rows;
+        this.cols = cols;
+        this.tablero = new Tablero(ctx,this.rows,this.cols,width,height);
     }
 
     draw(){
