@@ -88,7 +88,7 @@ class Tablero {
     }
     //Verifica si hubo alguna jugada que fue ganadora y retorna el color del ganador
     checkWinner(col, row){
-        console.log(this.espacios[0][this.rows-1].posX-75, this.espacios[this.cols-1][0].posY+18);
+        console.log(col,row);
         let chipDropped = this.espacios[row][col].ficha;
         if(this.checkHorizontal(col,row) || this.checkVertical(col,row) || this.checkDiagonalLeft(col,row) || this.checkDiagonalRight(col,row)){
             this.fichasUnselectable();
@@ -308,7 +308,7 @@ class Tablero {
      // Se encarga de devolver la columna seleccionada
     getColSelected(posX,posY){
         let returnedIndex = -1;
-        let finalY = this.espacios[this.cols-1][0].posY;
+        let finalY = this.espacios[this.rows-1][0].posY;
         this.espacios[0].forEach((celda,index) => {
             if(posY <= finalY+66 && posX >= celda.posX && posX <= (celda.posX + celda.width)){
                 returnedIndex = index;
