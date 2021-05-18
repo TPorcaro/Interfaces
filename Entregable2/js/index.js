@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     canvas.width = 1600;
     canvas.height = 900;
     let quantityFichasBefore = 0;
+    let isATie = false;
     let ctx = canvas.getContext('2d');
     let juego1 = new Juego(ctx, canvas.width,canvas.height);
     juego1.draw();
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     let fichaAzul = document.querySelector('.fichaAzul');
     // Se encarga de esconder o mostrar en pantalla dependiendo el turno
     let intervalTurn = setInterval(() => {
-        if(!juego1.checkTie()){ // Si es empate no muestro que es turno de nadie
+        if(!isATie){ // Si es empate no muestro que es turno de nadie
             if(juego1.getColorTurn() == 'red'){
                 fichaRoja.classList.add('showFicha');
                 fichaRoja.classList.remove('hideFicha');
@@ -48,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () =>{
     btnSend.addEventListener('click', () => {
         let cols = document.querySelector('#cols').value;
         let rows = document.querySelector('#rows').value;
-        if(rows !== "" && (rows >= 5 && rows <=10)){
-            if(cols !== "" && (cols >= 5 && cols <=10)){
+        if(rows !== "" && (rows >= 1 && rows <=10)){
+            if(cols !== "" && (cols >= 1 && cols <=10)){
                 juego1 = new Juego(ctx,canvas.width,canvas.height, rows,cols);
                 juego1.draw();
             }else{
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 let moveAudio = new Audio('./assets/move.mp3');
                 moveAudio.play();
             }
-            let isATie = juego1.checkTie();
+            isATie = juego1.checkTie();
             if(isATie){
                 textP.textContent = "Empate :(";
                 fichaAzul.classList.add('hideFicha');
