@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () =>{
                 juego1 = new Juego(ctx,canvas.width,canvas.height, rows,cols);
                 juego1.draw();
             }else{
-                alert('El tamaño minimo es de 5x5');
+                alert('El tamaño minimo es de 5x5 y el tamaño maximo es 10x10');
             }
         }else{
-            alert('El tamaño minimo es de 5x5');
+            alert('El tamaño minimo es de 5x5 y el tamaño maximo es 10x10');
         }
     })
     //Reinicio el juego eliminando el juego anterior y creando uno nuevo
