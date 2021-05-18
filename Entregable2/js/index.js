@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () =>{
             canvas.addEventListener('mousemove', (eMouseMove) => {
                 juego1.handleDrag(eMouseMove.offsetX, eMouseMove.offsetY)
             });
-           
         }
     });
     //Al dispararse el evento mouseup remueve el listener del mousemove y verifica cuantas fichas hay en el tablero antes de insertar
@@ -45,13 +44,26 @@ document.addEventListener('DOMContentLoaded', () =>{
     let btnReset = document.querySelector('.btnReset');
     let fireWorks = document.querySelector('.pyro');
     let textP = document.querySelector('.textP');
+    let btnSend = document.querySelector('.btnSend');
+    btnSend.addEventListener('click', () => {
+        let cols = document.querySelector('#cols').value;
+        let rows = document.querySelector('#rows').value;
+        if(rows !== "" && (rows >= 5 && rows <=10)){
+            if(cols !== "" && (cols >= 5 && cols <=10)){
+                juego1 = new Juego(ctx,canvas.width,canvas.height, rows,cols);
+                juego1.draw();
+            }else{
+                alert('El tamaño minimo es de 5x5');
+            }
+        }else{
+            alert('El tamaño minimo es de 5x5');
+        }
+    })
     //Reinicio el juego eliminando el juego anterior y creando uno nuevo
     btnReset.addEventListener('click', () => {
         juego1 = new Juego(ctx, canvas.width,canvas.height);
         juego1.draw();
         textP.textContent = "Turno de ";
-        btnReset.classList.add('hide');
-        btnReset.classList.remove('show');
         audio.pause();
         fireWorks.classList.remove('show');
         fireWorks.classList.add('hide');
@@ -66,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () =>{
             audio.autoplay=true;
             audio.loop = true;
             audio.play();
-            btnReset.classList.add('show');
-            btnReset.classList.remove('hide');
         }else{
             // En caso de que no haya un ganador hay que preguntar si hubo empate o no,
             // si hubo un empate remuevo las fichas que se encargan de mostrar los turnos
@@ -78,8 +88,6 @@ document.addEventListener('DOMContentLoaded', () =>{
             let isATie = juego1.checkTie();
             if(isATie){
                 textP.textContent = "Empate :(";
-                btnReset.classList.add('show');
-                btnReset.classList.remove('hide');
                 fichaAzul.classList.add('hideFicha');
                 fichaRoja.classList.add('hideFicha');
                 fichaAzul.classList.remove('showFicha');
