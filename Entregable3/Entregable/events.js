@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             let urlBase = window.location.origin;
             if(link.innerHTML === "Hero"){
-                window.location.assign(urlBase+ "/Entregable/index.html");
+                window.location.assign(urlBase+ "/Interfaces/Entregable3/Entregable/index.html");
             }else{
-                window.location.assign(urlBase+ "/Entregable/form.html");
+                window.location.assign(urlBase+ "/Interfaces/Entregable3/Entregable/form.html");
             }
         })
     })
