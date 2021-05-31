@@ -542,7 +542,7 @@ input[type=checkbox]:checked + label {
   transform: scaleX(1.1);
 }
 .submit-button.animated {
-  animation: 0.75s short-press cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: 0.75s short-press ease-in forwards;
 }
 .submit-button > span {
   display: block;
@@ -550,7 +550,7 @@ input[type=checkbox]:checked + label {
   text-align: center;
 }
 .submit-button > span.pre-state-msg {
-  transition: all 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: all 0.7s ease-in;
   transition-delay: 0.75s;
 }
 .submit-button.state-1 .pre-state-msg {
