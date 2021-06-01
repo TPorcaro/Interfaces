@@ -163,7 +163,6 @@ input:checked ~ .tab-content {
     top: 40px;
     left: 40px;
     z-index: 1;
-    -webkit-user-select: none;
     user-select: none;
     animation: menuToggle 1s ease-out 1;
   }
@@ -199,7 +198,6 @@ input:checked ~ .tab-content {
     cursor: pointer;
     opacity: 0;
     z-index: 2;  
-    -webkit-touch-callout: none;
   }
   #menuToggle span{
     display: block;
@@ -212,8 +210,8 @@ input:checked ~ .tab-content {
     z-index: 1;
     transform-origin: 4px 0px;
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-                opacity 0.55s ease;
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
   }
   #menuToggle span:first-child{
     transform-origin: 0% 0%;
@@ -246,7 +244,6 @@ input:checked ~ .tab-content {
     padding-top: 125px;
     background: #ededed;
     list-style-type: none;
-    -webkit-font-smoothing: antialiased;
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -328,8 +325,6 @@ input:checked ~ .tab-content {
   .head {
     background: #dad5cd;
     border-radius: 90px 90px 14px 14px;
-    -moz-border-radius: 90px 90px 14px 14px;
-    -webkit-border-radius: 90px 90px 14px 14px;
     height: 56px;
     margin-left: -45px;
     overflow: hidden;

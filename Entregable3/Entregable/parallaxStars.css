@@ -1,3 +1,5 @@
+/* https://codepen.io/mattmarble/pen/qBdamQz */
+/* Dibuja cada estrella con los border box, con el ::after crea un hijo de stars */
 #stars {
     width: 2px;
     height: 2px;

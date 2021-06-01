@@ -159,7 +159,6 @@ input[type=checkbox]:checked + label {
     top: 40px;
     left: 40px;
     z-index: 1;
-    -webkit-user-select: none;
     user-select: none;
     animation: menuToggle 1s ease-out 1;
   }
@@ -195,7 +194,6 @@ input[type=checkbox]:checked + label {
     cursor: pointer;
     opacity: 0;
     z-index: 2;  
-    -webkit-touch-callout: none;
   }
   #menuToggle span{
     display: block;
@@ -322,8 +320,6 @@ input[type=checkbox]:checked + label {
   .head {
     background: #dad5cd;
     border-radius: 90px 90px 14px 14px;
-    -moz-border-radius: 90px 90px 14px 14px;
-    -webkit-border-radius: 90px 90px 14px 14px;
     height: 56px;
     margin-left: -45px;
     overflow: hidden;

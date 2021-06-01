@@ -16,6 +16,7 @@ body {
 .hide{
   display: none;
 }
+/* Scroll parallax  */
 .parallax-wrapper {
     margin-top: -1.6%;
     width: 100vw;
@@ -70,14 +71,13 @@ body {
     background-size: 100% 100%;
     text-align: center;
 }
-
+/* Burger menu */
 #menuToggle{
     display: block;
     position: relative;
     top: 40px;
     left: 50px;
     z-index: 1;
-    -webkit-user-select: none;
     user-select: none;
     animation: menuToggle 1s ease-out 1;
   }
@@ -113,7 +113,6 @@ body {
     cursor: pointer;
     opacity: 0;
     z-index: 2;  
-    -webkit-touch-callout: none;
   }
   #menuToggle span{
     display: block;
@@ -125,6 +124,7 @@ body {
     border-radius: 3px;
     z-index: 1;
     transform-origin: 4px 0px;
+    /* animacion del menuBurger */
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
                 opacity 0.55s ease;
@@ -160,10 +160,9 @@ body {
     padding-top: 125px;
     background: #ededed;
     list-style-type: none;
-    -webkit-font-smoothing: antialiased;
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: transform 0.5s ease-in;
   }
   
   #menu li{
@@ -174,6 +173,7 @@ body {
   #menuToggle input:checked ~ ul{
     transform: none;
   }
+  /*Divider*/
   .divider {
     display: flex;
     position: inherit;
@@ -214,6 +214,7 @@ body {
 .glow:after {
   background: linear-gradient(to left, blue, red);
 }
+/* Star Wars del principio */
 .star {
   animation: star 1.5s  reverse 1;
 }
@@ -298,29 +299,6 @@ img {
   text-transform: uppercase;
   top: 29%;
 }
-.falcon{
-  animation: falconFly 10s linear 1;
-}
-@keyframes falconFly{
-    0%{
-      transform: translateX(-100em) scale(0.1) rotate(-15deg);
-    }
-    100%{
-      transform: translateX(500em) scale(0.1) rotate(-15deg)
-    }
-}
-.laserBeam{
-    animation: laserBeam 5s linear infinite;
-}
-@keyframes laserBeam{
-  0%{
-    transform: translateX(-100em) scale(0.1);
-  }
-  100%{
-    transform: translateX(500em) scale(0.5);
-  }
-}
-
 /*diseño de BB 8 https://codepen.io/franksLaboratory/pen/mdyewbW */
 .loader{
   position:absolute;
@@ -388,8 +366,6 @@ img {
 .head {
   background: #dad5cd;
   border-radius: 90px 90px 14px 14px;
-  -moz-border-radius: 90px 90px 14px 14px;
-  -webkit-border-radius: 90px 90px 14px 14px;
   height: 56px;
   margin-left: -45px;
   overflow: hidden;
@@ -569,6 +545,7 @@ img {
       transform: translateX(-110%);
   }
 }
+/*CountDown*/
 #headLine {
   font-weight: normal;
   letter-spacing: .125rem;
@@ -652,7 +629,6 @@ img {
   margin: 0;
   color: white;
   perspective: 1000px;
-  transform-origin: center;
 }
 .icon-cards__content {
   position: absolute;
@@ -661,10 +637,10 @@ img {
   transform-origin: center;
   transform-style: preserve-3d;
   transform: translateZ(-30vw) rotateY(0);
-  animation: carousel 10s infinite cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: carousel 10s infinite ease;
 }
 .icon-cards__content.step-animation {
-  animation: carousel 8s infinite steps(1) forwards;
+  animation: carousel 8s infinite steps(1);
 }
 .icon-cards__item {
   position: absolute;
