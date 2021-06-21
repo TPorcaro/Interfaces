@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   let elems = document.querySelectorAll('.tilt');
   elems.forEach(el => {
-  const height = el.clientHeight
-  const width = el.clientWidth
+  const height = 200;
+  const width = 300;
   el.addEventListener('mousemove', handleMove)
 
     function handleMove(e) {

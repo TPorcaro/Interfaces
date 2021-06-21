@@ -1,5 +1,5 @@
 body{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     overflow-x: hidden;
     background-color: black;
     margin: 0;
@@ -54,13 +54,13 @@ input {
     display: flex;
     justify-content: space-between;
     padding: 1em;
-    background: #2c3e50;
+    background: #000203;
     font-weight: bold;
     cursor: pointer;
    /* Icon */
 }
 .tab-label:hover {
-    background: #1a252f;
+    background: #1f2020;
 }
 .tab-label::after {
     content: "\276F";
@@ -77,8 +77,9 @@ input {
     max-height: 0;
     padding: 0 1em;
     color: #2c3e50;
-    background: white;
+    background: black;
     transition: all 0.35s;
+    border: 1px solid white;
 }
 .tab-close {
     display: flex;
@@ -92,7 +93,7 @@ input {
     background: #1a252f;
 }
 input:checked + .tab-label {
-    background: #1a252f;
+  background: #1f2020;
 }
 input:checked + .tab-label::after {
     transform: rotate(90deg);
@@ -102,6 +103,7 @@ input:checked ~ .tab-content {
     padding: 1em;
 }
 .textAccordion{
+    color: white;
     width: 50%;
 }
 .tilt {
