@@ -572,7 +572,7 @@ img {
 #main-container {
   margin: 50px auto;
   width: 100%;
-  perspective: 900px;
+  perspective: 100rem;
 }
 .charactersTitle {
   text-align: center;
